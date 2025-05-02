@@ -7,7 +7,7 @@ app.use(express.json());
 
 // Simple health check  
 app.get('/', (req, res) => {
-    res.send('Supabase API is running!');
+    res.send('IMF Gadget API is running!');
 });
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_PUBLIC_KEY);
@@ -21,4 +21,4 @@ const gadgetsRoutes = require('./routes/gadgets')(supabase);
 app.use('/api/gadgets', gadgetsRoutes);
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
