@@ -40,7 +40,6 @@ module.exports = (supabase) => {
   router.post('/', async (req, res) => {
     const { status } = req.body;
     const name = generateCodename();
-    console.log('name', name)
 
     const { data, error } = await supabase.from('gadgets').insert([{ name, status }]).select();
 
@@ -52,7 +51,10 @@ module.exports = (supabase) => {
   // PATCH /gadgets/:id
   router.patch('/:id', async (req, res) => {
     const { id } = req.params;
-    const updates = req.body;
+    const updates = {
+      ...req.body,
+      last_updated_at: new Date().toISOString(), //time can be updated using triggers also
+    };
 
     const { data, error } = await supabase.from('gadgets').update(updates).eq('id', id).select();
 
